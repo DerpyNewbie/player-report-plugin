@@ -9,7 +9,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public enum Commands {
     REPORT(new ReportCommand(), "report", Messages.REPORT_PERMISSION_MESSAGE, PluginConfig.REPORT_ALIAS),
-    SHOW_REPORT(new ShowReportCommand(), "showReport", Messages.SHOW_REPORT_PERMISSION_MESSAGE, PluginConfig.SHOW_REPORT_ALIAS),
+    SHOW_REPORT(new ShowReportCommand(), "showReports", Messages.SHOW_REPORT_PERMISSION_MESSAGE, PluginConfig.SHOW_REPORT_ALIAS),
     DEBUG_GET_REPORT_DATA(new DebugGetReportData(), "getReportData", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_CONFIG(new DebugReloadConfig(), "reloadReportConfigs", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_MESSAGE(new DebugReloadMessage(), "reloadReportMessages", Messages.DEBUG_PERMISSION_MESSAGE),
