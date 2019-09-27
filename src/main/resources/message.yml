@@ -22,7 +22,7 @@ message:
     no-data-found-with-first-argument: "&cPlayer &4{TARGET_NAME}&c has no reports."
     report-data-begin: "&8&m-------------------"
     report-data-format: " \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}\n"
-    report-data-end: "&8&m-------------------"
+    report-data-end: "\n&8&m-------------------"
     remove-success: "&7Successfully removed report with data: \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}"
 debug:
   permission-message: "&cYou do not have permission to execute this command."
