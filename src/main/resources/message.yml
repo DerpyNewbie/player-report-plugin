@@ -1,0 +1,55 @@
+message:
+  report:
+    usage: "&f/<command> <player> <reason...>"
+    no-console: "&cConsole cannot use report command." # No placeholder available
+    no-player-provided: "&cPlease provide the player name.\n{USAGE}" # this and all below will has {NAME}, {DISPLAY_NAME}, {COOL_DOWN_TIME}.
+    no-reason-provided: "&cPlease provide the report reason.\n{USAGE}" # this and all below has {FIRST_ARGUMENT}.
+    no-command-in-cooldown: "&cPlease wait &4{COOL_DOWN_TIME}&c seconds to execute this command."
+    player-not-online: "&cPlayer &4{FIRST_ARGUMENT}&c not online."
+    report-success: "&7You have reported player \"&f{TARGET_NAME}&7\" for \"&f{REASON}&7\". \n&aThank you for the report!" # this has {TARGET_NAME}, {TARGET_DISPLAY_NAME}, {REASON}.
+  show-report:
+    usage: "&f/<command> [player] [integer] or /<command> <view | remove> <player> [integer]"
+    wrong-syntax: "&cWrong syntax!\n{USAGE}"
+    no-integer-provided: "&cInteger not provided!\n{USAGE}"
+    not-enough-argument: "&cNot enough arguments.\n{USAGE}"
+    show-latest: "&7Showing newest {REPORT_SIZE} reports."
+    on-data-load: "&7Loading report data..."
+    no-such-data-found: "&cReport data with &7User &4{TARGET_NAME}&7, Unique Key &4{UNIQUE_KEY}&c not found."
+    no-data-found: "&cNo reports found."
+    no-data-found-with-first-argument: "&cPlayer &4{TARGET_NAME}&c has no reports."
+    report-data-begin: "&8&m-------------------"
+    report-data-format: " \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}\n"
+    report-data-end: "&8&m-------------------"
+    remove-success: "&7Successfully removed report with data: \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}"
+debug:
+  you-cannot-edit-debug-command-message-because-im-too-lazy:
+
+# Additional info!
+#   "usage" info:
+#     All placeholders has placeholder of "{USAGE}".
+#     this placeholder shows message of each "usage" value of commands.
+#     pretty useful to show player how to use commands. isn't it?
+#
+#     usage has one placeholders can be use. it's <command>!
+#     it will be replaced to what command they used.
+#     For example, when the player execute /rEpOrt.
+#     <command> will be "rEpOrt"! (basically same as <command> in plugin.yml)
+#
+#
+#   DISPLAY_NAME suffixed placeholders can be used to offline player, but shows value of NAME instead of DISPLAY NAME.
+#     (shows correct display name when they are online.)
+#
+#   COOL_DOWN_TIME will have -1 when players are not in cool down.
+#
+# default player placeholders:
+#   {NAME}         : player's name.
+#   {DISPLAY_NAME} : player's display name.
+#
+# available placeholders in report-data-format:
+#   "REPORT" prefixed placeholders:
+#     "SENDER" prefixed default player placeholders.
+#     "TARGET" prefixed default place placeholders.
+#     "REASON"    : the reason in report.
+#     "DATE"      : the time when report sent.
+#     "UNIQUE_KEY": the unique key of report. required for removing reports.
+#

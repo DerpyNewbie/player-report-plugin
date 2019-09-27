@@ -1,0 +1,72 @@
+main: "com.github.derpynewbie.report.Report"
+name: "Reporter"
+version: "0.4.7-TESTBUILD"
+api-version: "1.13"
+author: "DerpyNewbie"
+website: "https://github.com/derpynewbie"
+description: "This plugin allows player to report players."
+commands:
+  report:
+    description: "Reports player"
+    usage: "/<command> <player> <reason>"
+    permission: "report.send"
+    permission-message: "&cOopsie woopsie! Uwu duwu nowt have pewmission tuwu execute wepowt command!"
+  showReports:
+    description: "Shows reports"
+    usage: "/<command> or /<command> <player> [remove | show]"
+    aliases: [reports]
+    permission: "report.read"
+    permission-message: "&cYou do not have permission to execute this command."
+  toggleReports:
+    description: "Toggles report broadcast message"
+    usage: "/<command>"
+    permission: "report.read"
+    permission-message: "&cYou do not have permission to execute this command."
+  saveReportData:
+    description: "Debug command. Manually saves config file."
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+  getReportData:
+    description: "Debug command. Gets users report data from config file."
+    usage: "/<command> <player>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+  removeReportData:
+    description: "Debug command. Removes user report data by specified index."
+    usage: "/<command> <player> <integer>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+  removeGarbageData:
+    description: "Debug command. Removes empty reported players in report data file."
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+  reloadReportMessages:
+    description: "Debug command. Reloads message.yml."
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+  reloadReportConfigs:
+    description: "Debug command. Reloads config.yml."
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
+
+permissions:
+  report.*:
+    description: "Allow player to use all commands."
+    default: op
+    children:
+      report.send: true
+      report.read: true
+      report.debug: true
+  report.send:
+    description: "Allow player to use /report."
+    default: true
+  report.read:
+    description: "Allow player to use /reports."
+    default: op
+  report.debug:
+    description: "Allow player to use debug commands."
+    default: op

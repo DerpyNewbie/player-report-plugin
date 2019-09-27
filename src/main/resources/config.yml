@@ -1,0 +1,5 @@
+config:
+  latest-report-size: 10  # Size of latest reports when executing /showReports.
+  command-cool-down:
+    cool-down-time: 60  # Cooling down time in seconds. value of Double.
+    time-format: "%1.1f"  # Check java string format documentation for Double.
