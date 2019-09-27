@@ -52,7 +52,11 @@ commands:
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-
+  reloadReportCommands:
+    description: "Debug command. Reloads Commands"
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
 permissions:
   report.*:
     description: "Allow player to use all commands."
