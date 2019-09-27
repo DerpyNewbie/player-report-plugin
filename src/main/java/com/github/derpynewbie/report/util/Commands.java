@@ -52,6 +52,8 @@ public enum Commands {
                 plCommand.setPermissionMessage(command.permissionMessage.getMessage());
                 if (command.aliasConfig != PluginConfig.NULL)
                     plCommand.setAliases(command.aliasConfig.getStringList());
+            } else {
+                pl.getLogger().severe("FAILED TO LOAD COMMAND. PLEASE REPORT THIS TO THE AUTHOR OF THIS PLUGIN.");
             }
         }
         IS_INIT = true;
