@@ -2,14 +2,21 @@ package com.github.derpynewbie.report.util;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
+
+import java.util.List;
 
 public enum PluginConfig {
+    NULL("config"),
     LATEST_REPORT_SIZE("config.latest-report-size"),
     COOL_DOWN_TIME_FORMAT("config.command-cool-down.time-format"),
     COOL_DOWN_TIME("config.command-cool-down.cool-down-time"),
+    REPORT_ALIAS("config.command.report.alias-in-string-list"),
+    SHOW_REPORT_ALIAS("config.command.show-reports.alias-in-string-list"),
     ;
 
-    private static FileConfiguration config;
+    private static boolean IS_INIT = false;
+    private static FileConfiguration CONFIG;
     private String path;
 
     PluginConfig(String path) {
@@ -20,7 +27,8 @@ public enum PluginConfig {
         pl.getLogger().info("Reloading config.");
         pl.saveDefaultConfig();
         pl.reloadConfig();
-        config = pl.getConfig();
+        CONFIG = pl.getConfig();
+        IS_INIT = true;
         pl.getLogger().info("Reload complete.");
     }
 
@@ -28,15 +36,25 @@ public enum PluginConfig {
         return path;
     }
 
-    public String getString() {
-        return config.getString(path);
+    public static boolean isInitialized() {
+        return IS_INIT;
     }
 
+    public String getString() {
+        return CONFIG.getString(path);
+    }
+
+    @NotNull
+    public List<String> getStringList() {
+        return CONFIG.getStringList(path);
+    }
+
+    @NotNull
     public Double getDouble() {
-        return config.getDouble(path);
+        return CONFIG.getDouble(path);
     }
 
     public int getInt() {
-        return config.getInt(path);
+        return CONFIG.getInt(path);
     }
 }

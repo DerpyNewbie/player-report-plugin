@@ -3,3 +3,8 @@ config:
   command-cool-down:
     cool-down-time: 60  # Cooling down time in seconds. value of Double.
     time-format: "%1.1f"  # Check java string format documentation for Double.
+  command:
+    report:
+      alias-in-string-list: []
+    show-reports:
+      alias-in-string-list: [reports]

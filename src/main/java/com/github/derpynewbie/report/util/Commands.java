@@ -8,8 +8,8 @@ import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public enum Commands {
-    REPORT(new ReportCommand(), "report", Messages.REPORT_PERMISSION_MESSAGE),
-    SHOW_REPORT(new ShowReportCommand(), "showReport", Messages.SHOW_REPORT_PERMISSION_MESSAGE),
+    REPORT(new ReportCommand(), "report", Messages.REPORT_PERMISSION_MESSAGE, PluginConfig.REPORT_ALIAS),
+    SHOW_REPORT(new ShowReportCommand(), "showReport", Messages.SHOW_REPORT_PERMISSION_MESSAGE, PluginConfig.SHOW_REPORT_ALIAS),
     DEBUG_GET_REPORT_DATA(new DebugGetReportData(), "getReportData", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_CONFIG(new DebugReloadConfig(), "reloadReportConfigs", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_MESSAGE(new DebugReloadMessage(), "reloadReportMessages", Messages.DEBUG_PERMISSION_MESSAGE),
@@ -23,15 +23,24 @@ public enum Commands {
     private CommandExecutor executor;
     private String label;
     private Messages permissionMessage;
+    private PluginConfig aliasConfig;
+
+    Commands(CommandExecutor executor, String label, Messages permissionMessage, PluginConfig alias) {
+        this(executor, label, permissionMessage);
+        this.aliasConfig = alias;
+    }
 
     Commands(CommandExecutor executor, String label, Messages permissionMessage) {
         this.executor = executor;
         this.label = label;
         this.permissionMessage = permissionMessage;
+        this.aliasConfig = PluginConfig.NULL;
     }
 
     public static void reloadCommands(JavaPlugin pl) {
         pl.getLogger().info("Reloading commands.");
+        if (!PluginConfig.isInitialized())
+            PluginConfig.reloadConfig(pl);
         if (!Messages.isInitialized())
             Messages.reloadMessage(pl);
         for (Commands command :
@@ -41,6 +50,8 @@ public enum Commands {
             if (plCommand != null) {
                 plCommand.setExecutor(command.executor);
                 plCommand.setPermissionMessage(command.permissionMessage.getMessage());
+                if (command.aliasConfig != PluginConfig.NULL)
+                    plCommand.setAliases(command.aliasConfig.getStringList());
             }
         }
         IS_INIT = true;
