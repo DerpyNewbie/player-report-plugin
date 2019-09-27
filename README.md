@@ -1,6 +1,5 @@
 # Player Report Plugin
-
-This plugin allows players to report another players (including yourself).
+This plugin allows players to report another players (excluding yourself).
 
 ## Permission nodes
 ```

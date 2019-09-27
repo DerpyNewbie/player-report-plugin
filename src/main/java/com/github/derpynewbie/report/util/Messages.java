@@ -20,6 +20,7 @@ public enum Messages {
     REPORT_NO_CONSOLE("message.report.no-console"),
     REPORT_NO_PLAYER_NAME_PROVIDED("message.report.no-player-provided"),
     REPORT_NO_REASON_PROVIDED("message.report.no-reason-provided"),
+    REPORT_NO_YOURSELF("message.report.no-reporting-yourself"),
     REPORT_NO_COMMAND_WHILE_IN_COOL_DOWN("message.report.no-command-in-cooldown"),
     REPORT_PLAYER_NOT_ONLINE("message.report.player-not-online"),
     REPORT_SUCCESS("message.report.report-success"),

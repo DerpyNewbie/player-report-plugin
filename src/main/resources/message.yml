@@ -5,6 +5,7 @@ message:
     no-console: "&cConsole cannot use report command." # No placeholder available
     no-player-provided: "&cPlease provide the player name.\n{USAGE}" # this and all below will has {NAME}, {DISPLAY_NAME}, {COOL_DOWN_TIME}.
     no-reason-provided: "&cPlease provide the report reason.\n{USAGE}" # this and all below has {FIRST_ARGUMENT}.
+    no-reporting-yourself: "&cYou shouldn't report yourself!"
     no-command-in-cooldown: "&cPlease wait &4{COOL_DOWN_TIME}&c seconds to execute this command."
     player-not-online: "&cPlayer &4{FIRST_ARGUMENT}&c not online."
     report-success: "&7You have reported player \"&f{TARGET_NAME}&7\" for \"&f{REASON}&7\". \n&aThank you for the report!" # this has {TARGET_NAME}, {TARGET_DISPLAY_NAME}, {REASON}.

@@ -53,6 +53,11 @@ public class ReportCommand implements TabExecutor {
             return true;
         }
 
+        if (target.getUniqueId() == sender.getUniqueId()) {
+            Messages.REPORT_NO_YOURSELF.sendMessageIfExists(sender, placeholder);
+            return true;
+        }
+
         if (strings.length <= 1) {
             Messages.REPORT_NO_REASON_PROVIDED.sendMessageIfExists(sender, placeholder);
             return true;
