@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public enum Messages {
+    REPORT_PERMISSION_MESSAGE("message.report.permission-message"),
     REPORT_USAGE("message.report.usage"),
     REPORT_NO_CONSOLE("message.report.no-console"),
     REPORT_NO_PLAYER_NAME_PROVIDED("message.report.no-player-provided"),
@@ -22,6 +23,7 @@ public enum Messages {
     REPORT_NO_COMMAND_WHILE_IN_COOL_DOWN("message.report.no-command-in-cooldown"),
     REPORT_PLAYER_NOT_ONLINE("message.report.player-not-online"),
     REPORT_SUCCESS("message.report.report-success"),
+    SHOW_REPORT_PERMISSION_MESSAGE("message.show-report.permission-message"),
     SHOW_REPORT_USAGE("message.show-report.usage"),
     SHOW_REPORT_WRONG_SYNTAX("message.show-report.wrong-syntax"),
     SHOW_REPORT_NO_INTEGER_PROVIDED("message.show-report.no-integer-provided"),
@@ -35,10 +37,11 @@ public enum Messages {
     SHOW_REPORT_DATA_FORMAT("message.show-report.report-data-format"),
     SHOW_REPORT_DATA_END("message.show-report.report-data-end"),
     SHOW_REPORT_REMOVE_SUCCESS("message.show-report.remove-success"),
-    ;
+    DEBUG_PERMISSION_MESSAGE("debug.permission-message");
 
     private static FileConfiguration CONFIG_FILE;
     private static File MESSAGE_FILE;
+    private static boolean IS_INIT = false;
 
     private String path;
 
@@ -47,11 +50,12 @@ public enum Messages {
     }
 
     public static void reloadMessage(JavaPlugin pl) {
-        pl.getLogger().info("Reloading message.");
+        pl.getLogger().info("Reloading messages.");
         MESSAGE_FILE = new File(pl.getDataFolder(), "message.yml");
         if (!MESSAGE_FILE.exists())
             pl.saveResource("message.yml", false);
         CONFIG_FILE = YamlConfiguration.loadConfiguration(MESSAGE_FILE);
+        IS_INIT = true;
         pl.getLogger().info("Reload complete.");
     }
 
@@ -118,5 +122,9 @@ public enum Messages {
             return true;
         }
         return false;
+    }
+
+    public static boolean isInitialized() {
+        return IS_INIT;
     }
 }
