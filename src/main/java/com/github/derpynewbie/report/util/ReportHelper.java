@@ -13,7 +13,9 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 public class ReportHelper {
 
@@ -178,6 +180,11 @@ public class ReportHelper {
         }
 
         return reportDataList;
+    }
+
+    public List<String> getReportedPlayerNameList() {
+        ConfigurationSection rootSection = getReportRootSection();
+        return rootSection.getKeys(false).parallelStream().map(Bukkit::getOfflinePlayer).map(OfflinePlayer::getName).collect(Collectors.toCollection(ArrayList::new));
     }
 
     public void removeGarbageData() {

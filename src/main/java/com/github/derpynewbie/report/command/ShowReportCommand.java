@@ -52,6 +52,7 @@ public class ShowReportCommand implements TabExecutor {
 
         if (strings.length == 2) {
             if (strings[0].toLowerCase().matches("view|remove")) {
+                placeholderMap.put("\\{FIRST_ARGUMENT\\}", strings[1]);
                 target = Bukkit.getOfflinePlayer(strings[1]);
 
                 if (strings[0].toLowerCase().matches("view")) {
@@ -75,6 +76,7 @@ public class ShowReportCommand implements TabExecutor {
         }
 
         if (strings[0].toLowerCase().matches("view|remove")) {
+            placeholderMap.put("\\{FIRST_ARGUMENT\\}", strings[1]);
             try {
                 target = Bukkit.getOfflinePlayer(strings[1]);
                 int uniqueKey = Integer.parseInt(strings[2]);
@@ -83,16 +85,11 @@ public class ShowReportCommand implements TabExecutor {
                 placeholderMap.putAll(Messages.getPlayerPlaceholder(target, "TARGET"));
 
                 if (strings[0].toLowerCase().matches("view")) {
-                    reportDataList = getReports(commandSender, target);
-
-                    for (ReportData data :
-                            reportDataList) {
-                        if (data.getUniqueKey() != uniqueKey)
-                            reportDataList.remove(data);
-                    }
-
-                    sendReportDataWithFormat(commandSender, reportDataList, placeholderMap, true);
-
+                    List<ReportData> singleReport = getSingleReport(commandSender, target, uniqueKey);
+                    if (!ReportData.isNullOrEmpty(singleReport.get(0)))
+                        sendReportDataWithFormat(commandSender, singleReport, placeholderMap, true);
+                    else
+                        Messages.SHOW_REPORT_NO_SUCH_DATA_FOUND.sendMessageIfExists(commandSender, placeholderMap);
                 } else if (strings[0].toLowerCase().matches("remove")) {
                     try {
                         ReportData removedReportData = Report.getInstance().getHelper().removeReportData(target, uniqueKey);
@@ -156,8 +153,8 @@ public class ShowReportCommand implements TabExecutor {
             return dataList.stream().map(ReportData::getUniqueKeyAsString).collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private void sendReportDataWithFormat(@NotNull CommandSender sender, @NotNull ArrayList<ReportData> reportDataArrayList, @NotNull Map<String, String> placeholder, boolean hasFirstArgument) {
-        if (reportDataArrayList.size() == 0) {
+    private void sendReportDataWithFormat(@NotNull CommandSender sender, @NotNull List<ReportData> reportDataList, @NotNull Map<String, String> placeholder, boolean hasFirstArgument) {
+        if (reportDataList.size() == 0 || reportDataList.size() == 1 && ReportData.isNullOrEmpty(reportDataList.get(0))) {
             if (hasFirstArgument)
                 Messages.SHOW_REPORT_NO_DATA_FOUND_WITH_FIRST_ARGUMENT.sendMessageIfExists(sender, placeholder);
             else
@@ -167,7 +164,7 @@ public class ShowReportCommand implements TabExecutor {
 
         Messages.SHOW_REPORT_DATA_BEGIN.sendMessageIfExists(sender, placeholder);
         for (ReportData data :
-                reportDataArrayList) {
+                reportDataList) {
             placeholder.putAll(data.getPlaceholder());
             Messages.SHOW_REPORT_DATA_FORMAT.sendMessageIfExists(sender, placeholder);
         }
@@ -190,6 +187,12 @@ public class ShowReportCommand implements TabExecutor {
             return Report.getInstance().getHelper().getReportData();
         else
             return Report.getInstance().getHelper().getReportData(player.getUniqueId());
+    }
+
+    @NotNull
+    private List<ReportData> getSingleReport(@NotNull CommandSender sender, @NotNull OfflinePlayer player, int uniqueKey) {
+        Messages.SHOW_REPORT_ON_DATA_LOAD.sendMessageIfExists(sender, null);
+        return Collections.singletonList(Report.getInstance().getHelper().getReportDataOf(player.getUniqueId(), uniqueKey));
     }
 
     private Map<String, String> getUsagePlaceholder(Command command) {
