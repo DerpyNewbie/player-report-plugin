@@ -77,6 +77,7 @@ public class ReportCommand implements TabExecutor {
         Report.getInstance().getHelper().createReportData(reportData);
 
         Messages.REPORT_SUCCESS.sendMessageIfExists(sender, placeholder);
+        Report.getInstance().broadcastReport(reportData);
         Double coolDownTime = PluginConfig.COOL_DOWN_TIME.getDouble();
         new CommandCoolDown(sender, coolDownTime).start();
 
@@ -92,7 +93,7 @@ public class ReportCommand implements TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length <= 1) {
-            return Bukkit.getOnlinePlayers().stream().map(Player::getName).sorted((o1, o2) -> o1.compareTo(strings[0])).collect(Collectors.toCollection(ArrayList::new));
+            return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(plName -> plName.toLowerCase().startsWith(strings[0].toLowerCase()) || strings[0].isEmpty()).collect(Collectors.toCollection(ArrayList::new));
         }
         return null;
     }

@@ -39,13 +39,14 @@ public class ShowReportCommand implements TabExecutor {
         OfflinePlayer target;
 
         if (strings.length == 1) {
-            if (strings[0].toLowerCase().matches("view|remove")) {
+            if (strings[0].toLowerCase().matches("remove")) {
                 Messages.SHOW_REPORT_NOT_ENOUGH_ARGUMENT.sendMessageIfExists(commandSender, placeholderMap);
+            } else if (strings[0].toLowerCase().matches("view")) {
+                handleShowLatest(commandSender, null, PluginConfig.LATEST_REPORT_SIZE.getInt(1), placeholderMap, false);
             } else {
                 target = Bukkit.getOfflinePlayer(strings[0]);
                 handleShowLatest(commandSender, target, PluginConfig.LATEST_REPORT_SIZE.getInt(1), placeholderMap, true);
             }
-
             return true;
         }
 
@@ -131,10 +132,10 @@ public class ShowReportCommand implements TabExecutor {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length == 1) {
-            return FIRST_ARGUMENT.stream().sorted((o1, o2) -> o1.compareTo(strings[0])).collect(Collectors.toCollection(ArrayList::new));
+            return FIRST_ARGUMENT.stream().filter(args -> args.toLowerCase().startsWith(strings[0].toLowerCase()) || strings[0].isEmpty()).collect(Collectors.toCollection(ArrayList::new));
         } else if (strings.length == 2) {
             if (strings[0].toLowerCase().matches("view|remove"))
-                return Bukkit.getOnlinePlayers().stream().map(Player::getName).sorted((o1, o2) -> o1.compareTo(strings[0])).collect(Collectors.toCollection(ArrayList::new));
+                return Bukkit.getOnlinePlayers().stream().map(Player::getName).filter(plName -> plName.toLowerCase().startsWith(strings[1].toLowerCase()) || strings[1].isEmpty()).collect(Collectors.toCollection(ArrayList::new));
             else
                 return getUniqueKeyList(strings[0]);
         } else if (strings.length == 3 && strings[0].toLowerCase().matches("view|remove")) {
