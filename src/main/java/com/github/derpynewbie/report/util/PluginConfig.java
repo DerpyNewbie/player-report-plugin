@@ -58,4 +58,8 @@ public enum PluginConfig {
     public int getInt() {
         return CONFIG.getInt(path);
     }
+
+    public int getInt(int min) {
+        return Math.max(CONFIG.getInt(path), min);
+    }
 }

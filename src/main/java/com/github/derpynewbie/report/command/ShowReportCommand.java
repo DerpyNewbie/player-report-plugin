@@ -31,12 +31,7 @@ public class ShowReportCommand implements TabExecutor {
         placeholderMap.putAll(Messages.getCommandSenderPlaceholder(commandSender));
 
         if (strings.length == 0) {
-            int i = PluginConfig.LATEST_REPORT_SIZE.getInt();
-            reportDataList = getLatestReports(commandSender, null, Math.max(i, 1));
-            placeholderMap.put("\\{REPORT_SIZE\\}", String.valueOf(reportDataList.size()));
-            if (reportDataList.size() != 0)
-                Messages.SHOW_REPORT_LATEST.sendMessageIfExists(commandSender, placeholderMap);
-            sendReportDataWithFormat(commandSender, reportDataList, placeholderMap, false);
+            handleShowLatest(commandSender, null, PluginConfig.LATEST_REPORT_SIZE.getInt(1), placeholderMap, false);
             return true;
         }
 
@@ -48,13 +43,7 @@ public class ShowReportCommand implements TabExecutor {
                 Messages.SHOW_REPORT_NOT_ENOUGH_ARGUMENT.sendMessageIfExists(commandSender, placeholderMap);
             } else {
                 target = Bukkit.getOfflinePlayer(strings[0]);
-                placeholderMap.putAll(Messages.getPlayerPlaceholder(target, "TARGET"));
-                // Duplicated code
-                reportDataList = getLatestReports(commandSender, target, PluginConfig.LATEST_REPORT_SIZE.getInt());
-                placeholderMap.put("\\{REPORT_SIZE\\}", String.valueOf(reportDataList.size()));
-                if (reportDataList.size() != 0)
-                    Messages.SHOW_REPORT_LATEST.sendMessageIfExists(commandSender, placeholderMap);
-                sendReportDataWithFormat(commandSender, reportDataList, placeholderMap, true);
+                handleShowLatest(commandSender, target, PluginConfig.LATEST_REPORT_SIZE.getInt(1), placeholderMap, true);
             }
 
             return true;
@@ -63,13 +52,11 @@ public class ShowReportCommand implements TabExecutor {
         if (strings.length == 2) {
             if (strings[0].toLowerCase().matches("view|remove")) {
                 target = Bukkit.getOfflinePlayer(strings[1]);
-                placeholderMap.putAll(Messages.getPlayerPlaceholder(target, "TARGET"));
 
                 if (strings[0].toLowerCase().matches("view")) {
-                    // Duplicated code
-                    reportDataList = getLatestReports(commandSender, target, PluginConfig.LATEST_REPORT_SIZE.getInt());
-                    sendReportDataWithFormat(commandSender, reportDataList, placeholderMap, true);
+                    handleShowLatest(commandSender, target, PluginConfig.LATEST_REPORT_SIZE.getInt(1), placeholderMap, true);
                 } else if (strings[0].toLowerCase().matches("remove")) {
+                    placeholderMap.putAll(Messages.getPlayerPlaceholder(target, "TARGET"));
                     Messages.SHOW_REPORT_NOT_ENOUGH_ARGUMENT.sendMessageIfExists(commandSender, placeholderMap);
                 }
             } else {
@@ -77,9 +64,7 @@ public class ShowReportCommand implements TabExecutor {
                     target = Bukkit.getOfflinePlayer(strings[0]);
                     int size = Integer.parseInt(strings[1]);
                     // Duplicated code
-                    reportDataList = getLatestReports(commandSender, target, size);
-                    Messages.SHOW_REPORT_LATEST.sendMessageIfExists(commandSender, placeholderMap);
-                    sendReportDataWithFormat(commandSender, reportDataList, placeholderMap, true);
+                    handleShowLatest(commandSender, target, size, placeholderMap, true);
                 } catch (NumberFormatException ex1) {
                     Messages.SHOW_REPORT_NO_INTEGER_PROVIDED.sendMessageIfExists(commandSender, placeholderMap);
                 }
@@ -127,6 +112,22 @@ public class ShowReportCommand implements TabExecutor {
         return true;
     }
 
+    private void handleShowLatest(@NotNull CommandSender sender, @Nullable OfflinePlayer target, int size, @NotNull Map<String, String> placeholder, boolean hasFirstArgument) {
+        ArrayList<ReportData> reportDataList = getLatestReports(sender, target, size);
+        placeholder.put("\\{REPORT_SIZE\\}", String.valueOf(reportDataList.size()));
+
+        if (reportDataList.size() != 0) {
+            if (target != null) {
+                placeholder.putAll(Messages.getPlayerPlaceholder(target, "TARGET"));
+                Messages.SHOW_REPORT_LATEST_WITH_NAME.sendMessageIfExists(sender, placeholder);
+            } else {
+                Messages.SHOW_REPORT_LATEST.sendMessageIfExists(sender, placeholder);
+            }
+        }
+
+        sendReportDataWithFormat(sender, reportDataList, placeholder, hasFirstArgument);
+    }
+
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length == 1) {
@@ -144,10 +145,12 @@ public class ShowReportCommand implements TabExecutor {
     }
 
     @NotNull
-    private List<String> getUniqueKeyList(String name) {
+    private List<String> getUniqueKeyList(@NotNull String name) {
+        if (name.isEmpty())
+            return Collections.singletonList(ChatColor.RED + "[ERROR: Name is empty.]");
         ArrayList<ReportData> dataList = Report.getInstance().getHelper().getReportData(Bukkit.getOfflinePlayer(name).getUniqueId());
         if (dataList.size() == 0)
-            return Collections.singletonList(ChatColor.RED + "No unique keys found.");
+            return Collections.singletonList(ChatColor.RED + "[ERROR: No unique keys found.]");
         else
             return dataList.stream().map(ReportData::getUniqueKeyAsString).collect(Collectors.toCollection(ArrayList::new));
     }

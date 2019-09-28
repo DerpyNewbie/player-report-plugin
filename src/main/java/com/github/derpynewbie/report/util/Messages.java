@@ -31,6 +31,7 @@ public enum Messages {
     SHOW_REPORT_NO_INTEGER_PROVIDED("message.show-report.no-integer-provided"),
     SHOW_REPORT_NOT_ENOUGH_ARGUMENT("message.show-report.not-enough-argument"),
     SHOW_REPORT_LATEST("message.show-report.show-latest"),
+    SHOW_REPORT_LATEST_WITH_NAME("message.show-report.show-latest-with-name"),
     SHOW_REPORT_ON_DATA_LOAD("message.show-report.on-data-load"),
     SHOW_REPORT_NO_SUCH_DATA_FOUND("message.show-report.no-such-data-found"),
     SHOW_REPORT_NO_DATA_FOUND("message.show-report.no-data-found"),
