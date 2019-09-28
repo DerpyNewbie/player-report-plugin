@@ -52,10 +52,10 @@ public enum Commands {
             pl.getLogger().fine("Loading command: " + command.label);
             PluginCommand plCommand = pl.getCommand(command.label);
             if (plCommand != null) {
-                plCommand.setExecutor(command.executor);
-                plCommand.setPermissionMessage(command.permissionMessage.getMessage());
                 if (command.aliasConfig != PluginConfig.NULL)
                     plCommand.setAliases(command.aliasConfig.getStringList());
+                plCommand.setPermissionMessage(command.permissionMessage.getMessage());
+                plCommand.setExecutor(command.executor);
             } else {
                 pl.getLogger().severe("FAILED TO LOAD COMMAND. PLEASE REPORT THIS TO THE AUTHOR OF THIS PLUGIN.");
             }
