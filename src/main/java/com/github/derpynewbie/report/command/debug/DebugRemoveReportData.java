@@ -16,7 +16,7 @@ import java.util.List;
 public class DebugRemoveReportData implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        if (strings.length <= 0) {
+        if (strings.length <= 1) {
             commandSender.sendMessage("Not enough arguments.");
             return false;
         }
@@ -45,7 +45,6 @@ public class DebugRemoveReportData implements TabExecutor {
                 ArrayIndexOutOfBoundsException ex2) {
             commandSender.sendMessage(ex2.getMessage());
             Report.getInstance().getLogger().warning(ex2.getMessage());
-            ex2.printStackTrace();
             return true;
         }
 
