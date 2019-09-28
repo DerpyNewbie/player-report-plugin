@@ -125,7 +125,19 @@ public class ReportHelper {
         return reporterSection.getKeys(false).size() != 0;
     }
     // Naming rule   : data.<rootSection>.<reporterSection>.<dataSection>.<data>
+    //               : data.<REPORT_DATA_PATH>.<uniqueId>.<uniqueKey>.<data>
     // Data Structure: data.report.<reportedPlayer's Unique ID>.<Unique Keys>.<Data Name>
+
+    @Nullable
+    public ReportData getReportDataOf(@NotNull UUID uniqueId, int uniqueKey) {
+        ConfigurationSection reporterSection = getReporterSection(uniqueId);
+        ConfigurationSection dataSection = reporterSection.getConfigurationSection(String.valueOf(uniqueKey));
+
+        if (dataSection != null)
+            return new ReportData(dataSection);
+        else
+            return null;
+    }
 
     @NotNull
     public ArrayList<ReportData> getReportData(UUID uniqueId) {
