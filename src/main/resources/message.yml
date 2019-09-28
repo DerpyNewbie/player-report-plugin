@@ -9,6 +9,7 @@ message:
     no-command-in-cooldown: "&cPlease wait &4{COOL_DOWN_TIME}&c seconds to execute this command."
     player-not-online: "&cPlayer &4{FIRST_ARGUMENT}&c not online."
     report-success: "&7You have reported player \"&f{TARGET_NAME}&7\" for \"&f{REASON}&7\". \n&aThank you for the report!" # this has {TARGET_NAME}, {TARGET_DISPLAY_NAME}, {REASON}.
+    broadcast: "&3[Reports]\n &7User &f{REPORT_TARGET_DISPLAY_NAME}&7 has been reported by &f{REPORT_SENDER_DISPLAY_NAME}&7.\n Reason: {REPORT_REASON}"
   show-report:
     permission-message: "&cYou do not have permission to execute this command."
     usage: "&f/<command> [player] [integer] or /<command> <view | remove> <player> [integer]"
@@ -17,13 +18,19 @@ message:
     not-enough-argument: "&cNot enough arguments.\n{USAGE}"
     show-latest: "&7Showing newest {REPORT_SIZE} reports."
     on-data-load: "&7Loading report data..."
-    no-such-data-found: "&cReport data with &7User &4{TARGET_NAME}&7, Unique Key &4{UNIQUE_KEY}&c not found."
+    no-such-data-found: "&cReport data with User &4{TARGET_NAME}&c, Unique Key &4{UNIQUE_KEY}&c not found."
     no-data-found: "&cNo reports found."
     no-data-found-with-first-argument: "&cPlayer &4{TARGET_NAME}&c has no reports."
     report-data-begin: "&8&m-------------------"
     report-data-format: " \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}\n"
     report-data-end: "\n&8&m-------------------"
     remove-success: "&7Successfully removed report with data: \n&7Unique Key: &f{REPORT_UNIQUE_KEY}\n   &7Report Sender: &f{REPORT_SENDER_DISPLAY_NAME}\n   &7Reported Player: &f{REPORT_TARGET_DISPLAY_NAME}\n   &7Reason    : &f{REPORT_REASON}\n   &7Time stamp: &f{REPORT_DATE}"
+  toggle-report:
+    permission-message: "&cYou do not have permission to execute this command."
+    usage: "&f/<command>"
+    no-console: "&cConsole cannot use report command."
+    on-enable: "&7You have been &aenabled &7report message."
+    on-disable: "&7You have been &cdisabled &7report message."
 debug:
   permission-message: "&cYou do not have permission to execute this command."
   you-cannot-edit-debug-command-message-because-im-too-lazy:

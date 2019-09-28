@@ -14,7 +14,6 @@ commands:
   showReports:
     description: "Shows reports"
     usage: "/<command> or /<command> <player> [remove | show]"
-    aliases: [reports]
     permission: "report.read"
     permission-message: "&cYou do not have permission to execute this command."
   toggleReports:
@@ -22,37 +21,37 @@ commands:
     usage: "/<command>"
     permission: "report.read"
     permission-message: "&cYou do not have permission to execute this command."
-  saveReportData:
+  _report_saveReportData:
     description: "Debug command. Manually saves config file."
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  getReportData:
+  _report_getReportData:
     description: "Debug command. Gets users report data from config file."
     usage: "/<command> <player>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  removeReportData:
+  _report_removeReportData:
     description: "Debug command. Removes user report data by specified index."
     usage: "/<command> <player> <integer>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  removeGarbageData:
+  _report_removeGarbageData:
     description: "Debug command. Removes empty reported players in report data file."
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  reloadReportMessages:
+  _report_reloadReportMessages:
     description: "Debug command. Reloads message.yml."
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  reloadReportConfigs:
+  _report_reloadReportConfigs:
     description: "Debug command. Reloads config.yml."
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
-  reloadReportCommands:
+  _report_reloadReportCommands:
     description: "Debug command. Reloads Commands"
     usage: "/<command>"
     permission: "report.debug"
