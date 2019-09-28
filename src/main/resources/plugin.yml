@@ -56,6 +56,11 @@ commands:
     usage: "/<command>"
     permission: "report.debug"
     permission-message: "&cYou do not have permission to execute this command."
+  _report_testBroadcast:
+    description: "Debug command. sends test broadcast message."
+    usage: "/<command>"
+    permission: "report.debug"
+    permission-message: "&cYou do not have permission to execute this command."
 permissions:
   report.*:
     description: "Allow player to use all commands."

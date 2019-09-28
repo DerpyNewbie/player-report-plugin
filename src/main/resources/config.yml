@@ -8,3 +8,5 @@ config:
       alias-in-string-list: []
     show-reports:
       alias-in-string-list: [reports]
+    toggle-reports:
+      alais-in-string-list: []

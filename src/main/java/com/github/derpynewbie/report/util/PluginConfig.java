@@ -13,6 +13,7 @@ public enum PluginConfig {
     COOL_DOWN_TIME("config.command-cool-down.cool-down-time"),
     REPORT_ALIAS("config.command.report.alias-in-string-list"),
     SHOW_REPORT_ALIAS("config.command.show-reports.alias-in-string-list"),
+    TOGGLE_REPORT_ALIAS("config.command.toggle-reports.alias-in-string-list"),
     ;
 
     private static boolean IS_INIT = false;

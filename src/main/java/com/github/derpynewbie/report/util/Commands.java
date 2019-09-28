@@ -12,6 +12,7 @@ public enum Commands {
     REPORT(new ReportCommand(), "report", Messages.REPORT_PERMISSION_MESSAGE, PluginConfig.REPORT_ALIAS),
     SHOW_REPORT(new ShowReportCommand(), "showReports", Messages.SHOW_REPORT_PERMISSION_MESSAGE, PluginConfig.SHOW_REPORT_ALIAS),
     TOGGLE_REPORT(new ToggleReportsCommand(), "toggleReports", Messages.TOGGLE_REPORT_PERMISSION_MESSAGE, PluginConfig.TOGGLE_REPORT_ALIAS),
+    DEBUG_TEST_BROADCAST(new DebugBroadcastMessage(), "_report_testBroadcast", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_GET_REPORT_DATA(new DebugGetReportData(), "_report_getReportData", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_COMMAND(new DebugReloadCommand(), "_report_reloadReportCommands", Messages.DEBUG_PERMISSION_MESSAGE),
     DEBUG_RELOAD_CONFIG(new DebugReloadConfig(), "_report_reloadReportConfigs", Messages.DEBUG_PERMISSION_MESSAGE),

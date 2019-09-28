@@ -24,6 +24,7 @@ public enum Messages {
     REPORT_NO_COMMAND_WHILE_IN_COOL_DOWN("message.report.no-command-in-cooldown"),
     REPORT_PLAYER_NOT_ONLINE("message.report.player-not-online"),
     REPORT_SUCCESS("message.report.report-success"),
+    REPORT_BROADCAST("message.report.broadcast"),
     SHOW_REPORT_PERMISSION_MESSAGE("message.show-report.permission-message"),
     SHOW_REPORT_USAGE("message.show-report.usage"),
     SHOW_REPORT_WRONG_SYNTAX("message.show-report.wrong-syntax"),
@@ -38,6 +39,11 @@ public enum Messages {
     SHOW_REPORT_DATA_FORMAT("message.show-report.report-data-format"),
     SHOW_REPORT_DATA_END("message.show-report.report-data-end"),
     SHOW_REPORT_REMOVE_SUCCESS("message.show-report.remove-success"),
+    TOGGLE_REPORT_PERMISSION_MESSAGE("message.toggle-report.permission-message"),
+    TOGGLE_REPORT_USAGE("message.toggle-report.usage"),
+    TOGGLE_REPORT_NO_CONSOLE("message.toggle-report.no-console"),
+    TOGGLE_REPORT_ON_ENABLE("message.toggle-report.on-enable"),
+    TOGGLE_REPORT_ON_DISABLE("message.toggle-report.on-disable"),
     DEBUG_PERMISSION_MESSAGE("debug.permission-message");
 
     private static FileConfiguration CONFIG_FILE;
